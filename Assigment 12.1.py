@@ -7,7 +7,7 @@ response = urlopen(base_url).read()
 
 soup = BeautifulSoup(response)
 
-email_seznam = []#ko smo izvozili emaile jih dodamo v seznam z append
+email_seznam = []
 seznam_mest =[]
 seznam_imen = []
 
@@ -18,21 +18,22 @@ for link in soup.findAll("a"):
         person_soup = BeautifulSoup(person_html)
         email = person_soup.find("span", attrs={"class": "email"})
         city = person_soup.find("span", attrs={"data-city": True})
+        name_surname = person_soup.find("div", attrs={"class": "col-md-8"}).h1
 
-        #print (email.string)
         email_seznam.append(str(email.string))#tu dodamo v seznam
         seznam_mest.append(str(city.string))
+        seznam_imen.append(str(name_surname.string))
 
 print (email_seznam)
 print (seznam_mest)
+print (seznam_imen)
 
 
 
 #shranitev datoteke v txt datoteke(ali bilokatero vrsto)
-"""in_file = open("emails.txt", "w")"""
-with open("emails", "w") as in_file: #s tem ukazom lahko ukinemo zgornjo vrstico in spodnjo in_file.close, ker avtomatsko zapre datoteko
-    for email in email_seznam:                      #kar sem dal v trojni narekovaj lahko ukines s tem ukazom zgoraj
+with open("emails", "w") as in_file:
+    for email in email_seznam:
          in_file.write(email + "; "  + "\n")
 
-"""in_file.close()#ne pozabi te funkcije za zaprtje programa"""
+
 
