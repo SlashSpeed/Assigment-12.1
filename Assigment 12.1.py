@@ -24,16 +24,28 @@ for link in soup.findAll("a"):
         seznam_mest.append(str(city.string))
         seznam_imen.append(str(name_surname.string))
 
-print (email_seznam)
+"""print (email_seznam)
 print (seznam_mest)
-print (seznam_imen)
+print (seznam_imen)"""
 
 
 
 #shranitev datoteke v txt datoteke(ali bilokatero vrsto)
-with open("emails", "w") as in_file:
+"""with open("data_scrapper.csv", "w") as in_file:
     for email in email_seznam:
-         in_file.write(email + "; "  + "\n")
+         in_file.write(str(email) + "; "  + "\n")
+         in_file.write(str(city.string) + "; " + "\n")
+         in_file.write(str(name_surname.string) + "; " + "\n")"""
+
+csv_file = open("data_scraper.csv", "w")
+csv_file.write(str(email.string) + "; " + "\n")
+csv_file.write(str(city.string) + "; " + "\n")
+csv_file.write(str(name_surname.string) + "; " + "\n")
+
+
+csv_file.close()
+
+
 
 
 
